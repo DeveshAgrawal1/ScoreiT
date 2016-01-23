@@ -1,18 +1,15 @@
 from BeautifulSoup import BeautifulSoup
 import requests
 
-final=''
 def getscore():
     url='http://www.cricbuzz.com/cricket-match/live-scores'
     response=requests.get(url)
     source=response.text.encode('ascii','ignore')
     soup=BeautifulSoup(source)
     for score in soup.findAll('div',{'class':'list-group-item-text pad-0 margin0 cb-match-state'}):
-
         count,i,j=0,0,0
         x=score.find('a')
         print x.get('title')
-
         m=x.get('href')
         securl= "http://www.cricbuzz.com"+str(m)
         secresponse=requests.get(securl)
@@ -24,10 +21,8 @@ def getscore():
                 if lo==0:
                     break
                 print str(head.string)
-        
         print"\n"
         y=x.findAll('div')
-
         if len(y)==0:
             t=x.find('span')
             print "Match still to start \n"
