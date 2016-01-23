@@ -6,7 +6,6 @@ def getscore():
     response=requests.get(url)
     source=response.text.encode('ascii','ignore')
     soup=BeautifulSoup(source)
-    flag=False
     for score in soup.findAll('div',{'class':'list-group-item-text pad-0 margin0 cb-match-state'}):
         count,i,j=0,0,0
         x=score.find('a')
@@ -22,7 +21,7 @@ def getscore():
             if p[count]==r[j] and j!=len(r)-1:
                 j+=1
             count+=1
-        print q, p[i+1:count-len(r)+1].replace('&nbsp;&#8226;&nbsp;',' '),r,p[count+1:],y[1].text
+        print q, p[i+1:count-len(r)+1].replace('&nbsp;&#8226;&nbsp;',' '),r,p[count+1:],str(y[1].text)
         print "\n"
-
+        
 getscore()
